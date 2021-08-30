@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.charity.model.Institution;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +21,8 @@ public class IndexController {
 
     @GetMapping("/")
     public String getIndex(Model model) {
-        List<Institution> institutionList = institutionRepository.findAll().stream().collect(Collectors.toList());
-        model.addAttribute("institutions", institutionList);
+        List<Institution> institutionList = new ArrayList<>(institutionRepository.findAll());
+        model.addAttribute("institutionList", institutionList);
         return "index";
     }
 
